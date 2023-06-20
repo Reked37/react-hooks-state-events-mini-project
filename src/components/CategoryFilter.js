@@ -1,24 +1,26 @@
 import React, {useState} from "react";
 
-function CategoryFilter({categories, filterCategories}) {
-  const [buttonClass, setButtonClass]=useState(false)
+function CategoryFilter({categories, selectedButton, setSelectedButton}) {
+  
   
   const displayCategoriesButtons=categories.map((category)=>{
+    const colorButton= selectedButton=== category?"selected":""
     return(<button 
       key={category}  
-      onClick={selectedButton} 
-      className={buttonClass?"selected":""}>{category}
+      // onClick={selectedButton} 
+      onClick={()=>setSelectedButton(category)}
+      className={colorButton} 
+      value={selectedButton}>
+        {category}
       </button>)
   })
 
-  function selectedButton(event){
-    const pressedButton=event.target.textContent
-    const filteredButton=categories.filter(categoryButton=>categoryButton===pressedButton)
-    console.log('Filter:',filteredButton[0])
-    // setButtonClass((buttonClass)=> !buttonClass)
-    filterCategories(pressedButton)
-    return setButtonClass((buttonClass)=> !buttonClass)
-  }
+  // function selectedButton(event){
+  //   const pressedButton=event.target.textContent
+  //   const elementButton=event.target
+  //   console.log(elementButton)
+  //   return filterCategories(pressedButton)
+  // }
 
   return (
     <div className="categories">
